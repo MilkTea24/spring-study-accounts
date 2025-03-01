@@ -1,24 +1,18 @@
 package com.milktea.springstudyaccounts.entity;
 
-import com.milktea.springstudyaccounts.utils.BaseTimeEntity;
+import com.milktea.springstudyaccounts.utils.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
-import java.time.Clock;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "account_tb")
-public class Account extends BaseTimeEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
-    private Long id;
-
+public class Account extends BaseEntity {
     @Column(nullable = false)
     private BigDecimal balance;
+
+    protected Account() {}
 
     public Account(BigDecimal balance) {
         this.balance = balance;

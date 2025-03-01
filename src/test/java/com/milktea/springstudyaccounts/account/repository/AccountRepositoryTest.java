@@ -1,11 +1,15 @@
-package com.milktea.springstudyaccounts.account.entity;
+package com.milktea.springstudyaccounts.account.repository;
 
 import com.milktea.springstudyaccounts.account.fixture.AccountFixture;
+import com.milktea.springstudyaccounts.entity.Account;
+import com.milktea.springstudyaccounts.repository.AccountRepository;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
+import java.util.List;
 
 @DataJpaTest
 public class AccountRepositoryTest {
@@ -33,8 +37,8 @@ public class AccountRepositoryTest {
         Account savedSecondAccount = accountRepository.save(AccountFixture.builder().build());
 
         //when
-        Account findAccount = accountRepository.findById(savedAccount.getId());
-        Account findSecondAccount = accountRepository.findById(savedSecondAccount.getId());
+        Account findAccount = accountRepository.findById(savedAccount.getId()).get();
+        Account findSecondAccount = accountRepository.findById(savedSecondAccount.getId()).get();
 
         //then
         Assertions.assertEquals(findSecondAccount.getId(), savedSecondAccount.getId());

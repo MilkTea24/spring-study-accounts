@@ -1,6 +1,9 @@
-package com.milktea.springstudyaccounts.account.entity;
+package com.milktea.springstudyaccounts.account.repository;
 
 import com.milktea.springstudyaccounts.account.fixture.TransactionFixture;
+import com.milktea.springstudyaccounts.entity.Transaction;
+import com.milktea.springstudyaccounts.repository.TransactionRepository;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ public class TransactionRepositoryTest {
         Transaction savedTransaction = transactionRepository.save(transaction);
 
         //then
-        Assertions.assertNotNull(savedtransaction.getId());
+        Assertions.assertNotNull(savedTransaction.getId());
     }
 
     @Test
@@ -32,8 +35,8 @@ public class TransactionRepositoryTest {
         Transaction savedSecondTransaction = transactionRepository.save(TransactionFixture.builder().build());
 
         //when
-        Transaction findTransaction = transactionRepository.findById(savedTransaction.getId());
-        Transaction secondTransaction = transactionRepository.findById(savedSecondTransaction.getId());
+        Transaction findTransaction = transactionRepository.findById(savedTransaction.getId()).get();
+        Transaction secondTransaction = transactionRepository.findById(savedSecondTransaction.getId()).get();
 
         //then
         Assertions.assertEquals(savedSecondTransaction.getId(), secondTransaction.getId());
